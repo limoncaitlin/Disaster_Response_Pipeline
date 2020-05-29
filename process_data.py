@@ -1,16 +1,57 @@
 import sys
-
+import pandas as pd
+import numpy as np
+import sqlite3
+from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
-    pass
-
+    """
+    Function to load and merge data
+    
+    Arguments:
+        messages_filepath: messages.csv filepath
+        categories_filepath: categories.csv filepath
+    Output:
+        df -> message and categories csv files merged into 
+        a pandas dataframe
+    """
+    messages = pd.read_csv(messages_filepath)
+    categories = pd.read_csv(categories_filepath)
+    df = pd.merge(messages,categories,on='id')
+    return df 
 
 def clean_data(df):
-    pass
-
+    """
+    Data cleaning function. Splits category data into separate columns
+    and removes duplicate data.
+    
+    Arguments:
+        df -> Pandas dataframe produced by load_data function
+    Outputs:
+        df -> cleaned dataframe
+    """
+    categories = df['categories'].str.split(pat=';', expand=True)
+    row = df['categories'].str.split(pat=';', expand=True)
+    category_colnames = row.iloc[0]
+    category_colnames = category_colnames.apply(lambda x:x[:-2])
+    categories.columns = category_colnames
+    for column in categories:
+        # set each value to be the last character of the string
+        categories[column] = categories[column].str[-1]
+        # convert column from string to numeric
+        categories[column] = categories[column].astype(int)
+        # drop the original categories column from `df`
+    df=df.drop('categories', axis = 1)
+    # concatenate the original dataframe with the new `categories` dataframe
+    df = pd.concat([df,categories], axis=1)
+    # drop duplicates
+    df = df.drop_duplicates()
+    return df
+        
 
 def save_data(df, database_filename):
-    pass  
+    engine = create_engine('sqlite:///DisasterResponse.db')
+    df.to_sql('disaster_data', engine, index=False, if_exists='replace')  
 
 
 def main():
