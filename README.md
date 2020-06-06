@@ -19,17 +19,17 @@ The Project contains 3 components:
 1. Clone this repository
 2. Run the following commands in the root directory to create the database and setup the model:
   - ETL Pipeline
-  ---
+  ```
   python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
-  ---
+  ```
   - ML Pipeline
-  ---
+  ```
   python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
-  ---
+  ```
 3. In the app folder, run the following command:
-  ---
+  ```
   python run.py
-  ---
+  ```
 4. Go to http://0.0.0.0.3001/
 
 ## Additional Materials
