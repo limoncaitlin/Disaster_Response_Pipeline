@@ -39,8 +39,10 @@ There are 2 jupyter notebooks available to help understand the setup of both the
 The model implemented here has a very high accuracy score (0.946). However, when you use the web app, you will notice that the vast majority of things written in the text box are categorized as "related". This is the result of the training data being very unbalanced. The web app displays the number of messages in each category in the training set, and the vast majority are in the "related" category. There are methods to account for an unbalanced training set such as oversampling minority categories and undersampling majority categories, and in the future I would like to implement such methods to improve this model. You can view the precision and recall for each category in the ML Pipeline notebook and see that precision and recall vary widely based on category.
 
 ## Acknowledgements
-- <a href="https://www.udacity.com/">Udacity for creating the project and providing materials needed to implement the webapp and set up the notebooks.
-- ,a href="https://appen.com/">Figure Eight for providing the training data.
+- <a href="https://www.udacity.com/">Udacity 
+    for creating the project and providing materials needed to implement the webapp and set up the notebooks.
+- <a href="https://appen.com/">Figure Eight 
+    for providing the training data.
 
 
   
